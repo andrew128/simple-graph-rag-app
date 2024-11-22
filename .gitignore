@@ -78,3 +78,7 @@ stats.json
 
 # Optional: Project-specific files
 # Add any other project-specific files or directories that should be ignored
+
+# Neo4j
+
+./neo4j/
