@@ -81,4 +81,4 @@ stats.json
 
 # Neo4j
 
-./neo4j/
+neo4j/
