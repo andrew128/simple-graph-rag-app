@@ -1,3 +1,5 @@
+const { REACT_APP_API_URL } = process.env;
+
 export const addNode = async (text) => {
   const response = await fetch(`${REACT_APP_API_URL}/kg/nodes`, {
     method: 'POST',
