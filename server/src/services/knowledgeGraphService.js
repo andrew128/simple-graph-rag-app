@@ -40,7 +40,19 @@ class KnowledgeGraphService {
       const result = await session.run(
         `
         MATCH (n:TextNode)
-        WITH n, gds.similarity.cosine(n.embedding, $embedding) AS similarity
+        WITH n, reduce(dot = 0.0,
+            i IN range(0, size(n.embedding)-1) |
+            dot + n.embedding[i] * $embedding[i]
+        ) / (
+            sqrt(reduce(norm = 0.0,
+                i IN range(0, size(n.embedding)-1) |
+                norm + n.embedding[i] * n.embedding[i]
+            )) *
+            sqrt(reduce(norm = 0.0,
+                i IN range(0, size($embedding)-1) |
+                norm + $embedding[i] * $embedding[i]
+            ))
+        ) AS similarity
         ORDER BY similarity DESC
         LIMIT 3
         RETURN n, similarity
