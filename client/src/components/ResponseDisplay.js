@@ -26,3 +26,5 @@ const ResponseDisplay = ({ response, relevantNodes }) => {
     </Paper>
   );
 };
+
+export default ResponseDisplay;

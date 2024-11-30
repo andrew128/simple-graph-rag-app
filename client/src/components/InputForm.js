@@ -28,3 +28,5 @@ const InputForm = ({ onSubmit, type }) => {
     </form>
   );
 };
+
+export default InputForm;

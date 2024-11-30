@@ -2,15 +2,16 @@ services:
   neo4j:
     image: neo4j:5.25.1
     ports:
-      - "7474:7474"  # HTTP
-      - "7687:7687"  # Bolt
+      - "127.0.0.1:7474:7474"  # HTTP restricted to localhost
+      - "127.0.0.1:7687:7687"  # Bolt restricted to localhost
     environment:
-      - NEO4J_AUTH=neo4j/yourpassword  # Change this!
-      - NEO4J_apoc_export_file_enabled=true
-      - NEO4J_apoc_import_file_enabled=true
+      - NEO4J_AUTH=${NEO4J_USER}/${NEO4J_PASSWORD}
+      - NEO4J_apoc_export_file_enabled=false
+      - NEO4J_apoc_import_file_enabled=false
       - NEO4J_dbms_security_procedures_unrestricted=apoc.*
     volumes:
       - ./neo4j/data:/data
       - ./neo4j/logs:/logs
       - ./neo4j/import:/var/lib/neo4j/import
       - ./neo4j/plugins:/plugins
+
